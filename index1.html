@@ -6,13 +6,8 @@
 </head>
 <link rel="stylesheet" href="main-css.css">
 <body>
-<div class="person" id="me"></div>
-<div class="person">
-    <h1>
-        Ethel
-    </h1>
-    <p>Your Age: 28</p>
-</div>
+<div id="me"></div>
+<div id="you"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
@@ -26,6 +21,7 @@
     )
   };
   ReactDOM.render(<Person name="Dale" age="55"/>, document.querySelector('#me'));
+  ReactDOM.render(<Person name="Ethel" age="28"/>, document.querySelector('#you'));
 </script>
 </body>
 </html>

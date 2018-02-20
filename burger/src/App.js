@@ -6,31 +6,30 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: 'Tom', age: 27},
-      {name: 'Sarah', age: 47},
-      {name: 'Edward', age: 94},
+      {id:'afsg',name: 'Tom', age: 27},
+      {id:'adfe',name: 'Sarah', age: 47},
+      {id:'ppinnf',name: 'Edward', age: 94},
     ],
     showPersons: false,
   };
-  switchNameHandler = (name) => {
-    this.setState(
-      {
-        persons:[
-          {name: name, age: 27},
-          {name: 'Sarah', age: 47},
-          {name: 'Edward', age: 94},
-        ]
-      }
-    );
+  deletePersonHandler = (idx) => {
+    const persons = [...this.state.persons];
+    persons.splice(idx, 1);
+    this.setState({persons: persons});
   };
-  nameChangeHandler = (event) => {
+  nameChangeHandler = (event, id) => {
+    const personIdx = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    // const person = {...this.state.persons[personIdx]};
+    // person.name = event.target.value;
+    //OR
+    const person = Object.assign({},this.state.persons[personIdx],{name:event.target.value});
+    const persons = [...this.state.persons];
+    persons[personIdx] = person;
     this.setState(
       {
-        persons:[
-          {name: event.target.value, age: 27},
-          {name: 'Sarah', age: 47},
-          {name: 'Edward', age: 94},
-        ]
+        persons: persons
       }
     );
   };
@@ -51,19 +50,17 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            changed={this.nameChangeHandler}/>
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={() => this.switchNameHandler('Using bind is more efficient!')}>
-            Hello Im a child element
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}/>
+          {this.state.persons.map((person, idx) => {
+           return(
+             <Person
+               key={person.id}//used by react to optimize rendering, do not use index because if the a item is deleted all the indexes change and react will re-render all the items in the list rather than just the one with the corresponding key which is why we use the key not key is a property all react elements have by default
+               name={person.name}
+               age={person.age}
+               click={this.deletePersonHandler.bind(this,idx)}
+               changed={(event) => {this.nameChangeHandler(event, person.id)}}
+             />
+           )
+          })}
         </div>
       );
     }

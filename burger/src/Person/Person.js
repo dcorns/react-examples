@@ -8,8 +8,8 @@ import React from 'react';
 import './Person.css';//works from web pack
 const person = (props) => {
   return (
-    <div onClick={props.click} className="Person">
-    <p>I'm {props.name} and I am {props.age} years old!. {props.children}</p>
+    <div>
+    <p onClick={props.click} className="Person">I'm {props.name} and I am {props.age} years old!. {props.children}</p>
       <input type="text" onChange={props.changed} value={props.name}/>
     </div>
   );

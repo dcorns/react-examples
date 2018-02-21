@@ -5,11 +5,11 @@
  * MIT Licensed
  */
 import React from 'react';
-import './Person.css';//works from web pack
+import classes from './Person.css';//works from web pack
 const person = (props) => {
   return (
     <div>
-    <p onClick={props.click} className="Person">I'm {props.name} and I am {props.age} years old!. {props.children}</p>
+    <p onClick={props.click} className={classes.Person}>I'm {props.name} and I am {props.age} years old!. {props.children}</p>
       <input type="text" onChange={props.changed} value={props.name}/>
     </div>
   );

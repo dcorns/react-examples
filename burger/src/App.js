@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium'
 
 class App extends Component {
   state = {
@@ -40,17 +39,6 @@ class App extends Component {
     });
   };
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover':{
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      }
-    };
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -59,8 +47,9 @@ class App extends Component {
            return(
              <Person
                key={person.id}//used by react to optimize rendering, do not use index because if the a item is deleted all the indexes change and react will re-render all the items in the list rather than just the one with the corresponding key which is why we use the key not key is a property all react elements have by default
-               name={person.name}
-               age={person.age}
+               // name={person.name}
+               // age={person.age}
+               {...person}
                click={this.deletePersonHandler.bind(this,idx)}
                changed={(event) => {this.nameChangeHandler(event, person.id)}}
              />
@@ -73,7 +62,6 @@ class App extends Component {
       <div className="App">
         <h1>I be a React application</h1>
         <button
-          style={style}
           onClick={this.togglePersonsHandler}>Toggle Persons
         </button>
         {persons}
@@ -82,4 +70,4 @@ class App extends Component {
   };
 }
 
-export default Radium(App);
+export default App;

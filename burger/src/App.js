@@ -40,6 +40,7 @@ class App extends Component {
   };
   render() {
     let persons = null;
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -57,11 +58,13 @@ class App extends Component {
           })}
         </div>
       );
+      btnClass = classes.Red;
     }
     return (
       <div className={classes.App}>
         <h1>I be a React application</h1>
         <button
+          className={btnClass}
           onClick={this.togglePersonsHandler}>Toggle Persons
         </button>
         {persons}
